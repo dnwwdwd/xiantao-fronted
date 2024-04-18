@@ -1,21 +1,21 @@
 import { StoreOptions } from "vuex";
 
-
 export default {
   namespaced: true,
-  state : () => ({
+  state: () => ({
     loginUser: {
-      userName: '未登录',
+      userName: "未登录",
+      role: "notLogin",
     },
   }),
-  actions : {
-    async getLoginUser ({ commit, state }, payload) {
-      commit("updateUser", { userName: "C1own"});
+  actions: {
+    async getLoginUser({ commit, state }, payload) {
+      commit("updateUser", { userName: "C1own" });
     },
   },
-  mutations : {
-    updateUser (state, payload) {
-      state.loginUser = payload
+  mutations: {
+    updateUser(state, payload) {
+      state.loginUser = payload;
     },
-  }
+  },
 } as StoreOptions<any>;

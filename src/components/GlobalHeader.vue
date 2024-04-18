@@ -52,13 +52,17 @@ router.afterEach((to, from, failure) => {
 });
 
 const store = useStore();
-console.log(store.state.user.loginUser);
 
-setTimeout(() => {
+/*console.log(store.state.user.loginUser);*/
+
+/*setTimeout(() => {
   store.dispatch("user/getLoginUser", {
     userName: "C1own",
+    role: 'admin',
   });
-}, 3000);
+}, 3000);*/
+
+
 </script>
 
 <style scoped>
