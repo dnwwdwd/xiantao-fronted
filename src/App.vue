@@ -23,9 +23,10 @@ router.beforeEach((to, from, next) => {
 
   if (store.state.user.loginUser?.role !== "admin") {
     if (to.meta?.access === "canAdmin") {
-      next("/noAuth");
+      next("/noauth");
       return;
     }
   }
+  next();
 });
 </script>

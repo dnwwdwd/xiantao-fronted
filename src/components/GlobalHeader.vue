@@ -1,5 +1,5 @@
 <template>
-  <a-row class="grid-demo" id="globalHeader" align="center">
+  <a-row class="grid-demo" id="globalHeader" align="center" :wrap="false">
     <a-col flex="100px"> </a-col>
     <a-col flex="auto">
       <a-menu
@@ -18,9 +18,9 @@
             <div class="title">精灵 OJ</div>
           </div>
         </a-menu-item>
-        <a-menu-item v-for="item in routes" :key="item.path">
-          {{ item.name }}
-        </a-menu-item>
+          <a-menu-item v-for="item in visibleRoutes" :key="item.path">
+            {{ item.name }}
+          </a-menu-item>
       </a-menu>
     </a-col>
     <a-col flex="100px">
@@ -32,11 +32,29 @@
 <script setup lang="ts">
 import { routes } from "../router/router";
 import { useRoute, useRouter } from "vue-router";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useStore } from "vuex";
+import checkAccess from "@/access/checkAccess";
 
 const router = useRouter();
 const route = useRoute();
+const store = useStore();
+
+const loginUser = store.state.user.loginUser;
+
+const visibleRoutes = computed(() =>{
+  return routes.filter((item, index) => {
+    console.log(loginUser);
+    if (item.meta?.hideInMenu) {
+      return false;
+    }
+    // 根据权限显示菜单
+    if (!checkAccess(store.state.user.loginUser, item.meta?.access as string)) {
+      return false;
+    }
+    return true;
+  });
+});
 
 const selectedKeys = ref(["/"]);
 
@@ -51,17 +69,14 @@ router.afterEach((to, from, failure) => {
   selectedKeys.value = [to.path];
 });
 
-const store = useStore();
 
-/*console.log(store.state.user.loginUser);*/
 
-/*setTimeout(() => {
+setTimeout(() => {
   store.dispatch("user/getLoginUser", {
     userName: "C1own",
-    role: 'admin',
+    userRole: 'admin',
   });
-}, 3000);*/
-
+}, 3000);
 
 </script>
 
