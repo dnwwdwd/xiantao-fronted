@@ -1,6 +1,11 @@
 <template>
   <div id="app">
-    <basic-layout />
+    <template v-if="route.path.startsWith('/user')">
+      <router-view />
+    </template>
+    <template v-else>
+      <basic-layout />
+    </template>
   </div>
 </template>
 
@@ -11,16 +16,25 @@
 
 <script setup lang="ts">
 import BasicLayout from "@/layouts/BasicLayout.vue";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
+import { onMounted } from "vue";
+
+const route = useRoute();
+
+// 全局初始化函数，有全局单次调用的代码，都可以写到这里
+const doInit = () => {
+  console.log("hello 欢迎来到我的项目");
+};
+
+onMounted(() => {
+  doInit();
+});
 
 const router = useRouter();
 const store = useStore();
 
 router.beforeEach((to, from, next) => {
-  console.log(store.state.user.loginUser?.role);
-  console.log(to.meta?.access);
-
   if (store.state.user.loginUser?.role !== "admin") {
     if (to.meta?.access === "canAdmin") {
       next("/noauth");
