@@ -37,8 +37,8 @@
             border-radius: 5%;
             margin-top: 10px;
           "
-          >注册</a-button
-        >
+          >注册
+        </a-button>
       </a-form-item>
     </a-form>
   </div>

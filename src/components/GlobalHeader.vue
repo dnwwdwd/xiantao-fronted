@@ -44,7 +44,6 @@ const loginUser = store.state.user.loginUser;
 
 const visibleRoutes = computed(() =>{
   return routes.filter((item, index) => {
-    console.log(loginUser);
     if (item.meta?.hideInMenu) {
       return false;
     }
