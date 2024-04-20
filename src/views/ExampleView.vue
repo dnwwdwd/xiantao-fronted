@@ -1,6 +1,6 @@
 <template>
   <div class="exampleView">
-    <code-editor :value="codeValue" :handle-change="onCodeChange" />
+<!--    <code-editor :value="codeValue" :handle-change="onCodeChange" />-->
     <md-editor :value="mdValue" :handle-change="onMdChange" />
   </div>
 </template>

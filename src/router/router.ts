@@ -1,5 +1,6 @@
 import { RouteRecordRaw } from "vue-router";
 import HomeView from "@/views/ExampleView.vue";
+import AddQuestionView from "@/views/question/AddQuestionView.vue";
 import AdminView from "@/views/AdminView.vue";
 import UserLayout from "@/layouts/UserLayout.vue"
 import UserLoginView from "@/views/user/UserLoginView.vue"
@@ -33,6 +34,11 @@ export const routes: Array<RouteRecordRaw> = [
     path: "/",
     name: "浏览题目",
     component: HomeView,
+  },
+  {
+    path: "/add/question",
+    name: "创建题目",
+    component: AddQuestionView,
   },
   {
     path: "/hide",
