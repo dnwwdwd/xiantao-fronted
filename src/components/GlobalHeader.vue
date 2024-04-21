@@ -32,7 +32,7 @@
 <script setup lang="ts">
 import { routes } from "../router/router";
 import { useRoute, useRouter } from "vue-router";
-import { computed, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useStore } from "vuex";
 import checkAccess from "@/access/checkAccess";
 
@@ -68,12 +68,12 @@ router.afterEach((to, from, failure) => {
   selectedKeys.value = [to.path];
 });
 
-setTimeout(() => {
+onMounted(() => {
   store.dispatch("user/getLoginUser", {
     userName: "C1own",
     userRole: 'admin',
   });
-}, 3000);
+});
 
 </script>
 

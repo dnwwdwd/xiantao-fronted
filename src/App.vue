@@ -43,4 +43,29 @@ router.beforeEach((to, from, next) => {
   }
   next();
 });
+
+/**
+ * 解决 ResizeObserver loop completed with undelivered notifications.
+ *     at handleError (webpack-internal:///./node_modules/webpack-dev-server/client/overlay.js:299:58)
+ *     at eval (webpack-internal:///./node_modules/webpack-dev-server/client/overlay.js:318:7) 报错
+ */
+const debounce = (fn, delay) => {
+  let timer;
+  return (...args) => {
+    if (timer) {
+      clearTimeout(timer);
+    }
+    timer = setTimeout(() => {
+      fn(...args);
+    }, delay);
+  };
+};
+
+const _ResizeObserver = window.ResizeObserver;
+window.ResizeObserver = class ResizeObserver extends _ResizeObserver {
+  constructor(callback) {
+    callback = debounce(callback, 200);
+    super(callback);
+  }
+};
 </script>

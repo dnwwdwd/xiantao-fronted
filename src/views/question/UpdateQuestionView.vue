@@ -1,6 +1,6 @@
 <template>
   <div id="addQuestionView">
-    <h2>创建题目</h2>
+    <h2>修改题目</h2>
     <a-form :model="form" @submit="handleSubmit" label-align="left">
       <a-form-item field="title" label="题目名称">
         <a-input v-model="form.title" placeholder="请输入题目名称"></a-input>
@@ -103,7 +103,7 @@
           html-type="submit"
           type="primary"
           style="min-width: 150px; margin-top: 16px"
-          >提交
+          >创建题目
         </a-button>
       </a-form-item>
     </a-form>
@@ -111,72 +111,20 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref } from "vue";
+import { ref } from "vue";
 import MdEditor from "@/components/MdEditor.vue";
-import { JudgeConfig, QuestionControllerService } from "../../../generated";
+import { QuestionControllerService } from "../../../generated";
 import message from "@arco-design/web-vue/es/message";
-import { useRoute } from "vue-router";
 
-const route = useRoute();
-// 如果页面地址包含update，视为修改页面
-const updatePage = route.path.includes("update");
-
-/**
- * 根据题目获取旧的题目信息
- */
-const loadData = async () => {
-  const id = route.query.id;
-  if (!id) {
-    return;
-  }
-  const res = await QuestionControllerService.getQuestionByIdUsingGet(
-    id as any
-  );
-  if (res.code === 0) {
-    form.value = res.data as any;
-    // json 转 js 对象
-    if (!form.value.judgeCase) {
-      form.value.judgeCase = [
-        {
-          input: "",
-          output: "",
-        },
-      ];
-    } else {
-      form.value.judgeCase = JSON.parse(form.value.judgeCase as any);
-    }
-    if (!form.value.judgeConfig) {
-      form.value.judgeConfig = {
-        memoryLimit: 1000,
-        stackLimit: 1000,
-        timeLimit: 1000,
-      };
-    } else {
-      form.value.judgeConfig = JSON.parse(form.value.judgeConfig as any);
-    }
-    if (!form.value.tags) {
-      form.value.tags = [];
-    } else {
-      form.value.tags = JSON.parse(form.value.tags as any);
-    }
-  } else {
-    message.error("加载失败，" + res.message);
-  }
-};
-
-onMounted(() => {
-  loadData();
-});
-
-const form = ref({
-  title: "",
-  tags: [],
-  answer: "",
-  content: "",
+let form = ref({
+  title: "A + B + C",
+  tags: ["二分", "中等"],
+  answer: "二分 + 暴力破解",
+  content: "题目内容",
   judgeCase: [
     {
-      input: "",
-      output: "",
+      input: "1 2",
+      output: "3 4",
     },
   ],
   judgeConfig: {
@@ -205,25 +153,13 @@ const handleDelete = (index: number) => {
  * 删除判题用例
  */
 const handleSubmit = async () => {
-  // 区分是新建还是修改
-  if (updatePage) {
-    const res: any = await QuestionControllerService.updateQuestionUsingPost(
-      form.value
-    );
-    if (res?.code === 0) {
-      message.success("题目修改成功");
-    } else {
-      message.error("题目修改失败" + (res.message ? `，${res.message}` : ""));
-    }
+  const res: any = await QuestionControllerService.addQuestionUsingPost(
+    form.value
+  );
+  if (res?.code === 0) {
+    message.success("题目创建成功");
   } else {
-    const res = await QuestionControllerService.addQuestionUsingPost(
-      form.value
-    );
-    if (res.const == 0) {
-      message.success("题目创建成功");
-    } else {
-      message.error("题目创建失败" + (res.message ? `，${res.message}` : ""));
-    }
+    message.error("题目创建失败" + (res.message ? `，${res.message}` : ""));
   }
 };
 
