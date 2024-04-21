@@ -7,12 +7,13 @@
       :pagination="{
         showTotal: true,
         pageSize: searchParams.pageSize,
-        current: searchParams.pageNum,
+        current: searchParams.current,
         total,
       }"
+      @pageChange="onPageChange"
     >
       <template #optional="{ record }">
-        <a-button type="primary" @click="doUpdate(record)">修改 </a-button>
+        <a-button type="primary" @click="doUpdate(record)">修改</a-button>
         <a-button
           type="primary"
           status="danger"
@@ -26,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watchEffect } from "vue";
 import { Question, QuestionControllerService } from "../../../generated";
 import message from "@arco-design/web-vue/es/message";
 import { useRouter } from "vue-router";
@@ -39,17 +40,25 @@ const dataList = ref([]);
 
 const total = ref(0);
 const searchParams = ref({
-  pageSize: 10,
-  pageNum: 1,
+  pageSize: 2,
+  current: 1,
 });
+
+
+const onPageChange = (page: number) => {
+  searchParams.value = {
+    ...searchParams.value,
+    current: page,
+  };
+};
 
 const doUpdate = async (question: Question) => {
   console.log(question);
   router.push({
-    path: '/update/question',
+    path: "/update/question",
     query: {
       id: question.id,
-    }
+    },
   });
 };
 
@@ -72,10 +81,19 @@ const loadData = async () => {
   );
   if (res?.code === 0) {
     dataList.value = res.data.records;
+    total.value = res.data.total;
   } else {
     message.error("加载失败" + (res.message ? `，${res.message}` : ""));
   }
 };
+
+/**
+ * 监听 searchParams 变化时，重新加载 dataList
+ */
+watchEffect(() => {
+  loadData();
+});
+
 
 onMounted(() => {
   loadData();

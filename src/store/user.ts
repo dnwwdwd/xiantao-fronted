@@ -7,7 +7,7 @@ export default {
   state: () => ({
     loginUser: {
       userName: "未登录",
-      userRole: ACCESS_ENUM.NOT_LOGIN
+      userRole: ACCESS_ENUM.NOT_LOGIN,
     },
   }),
   actions: {
@@ -19,7 +19,7 @@ export default {
       } else {
         commit("updateUser", {
           ...state.loginUser,
-          userRole: ACCESS_ENUM.NOT_LOGIN
+          userRole: ACCESS_ENUM.NOT_LOGIN,
         });
       }
     },

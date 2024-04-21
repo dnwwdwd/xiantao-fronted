@@ -35,6 +35,7 @@ import { useRoute, useRouter } from "vue-router";
 import { computed, onMounted, ref } from "vue";
 import { useStore } from "vuex";
 import checkAccess from "@/access/checkAccess";
+import ACCESS_ENUM from "@/access/accessEnum";
 
 const router = useRouter();
 const route = useRoute();
@@ -62,6 +63,13 @@ const doMenuClick = (key: string) => {
     path: key,
   });
 };
+
+/*setTimeout(() => {
+  store.dispatch("user/getLoginUser", {
+    userName: "鱼皮管理员",
+    userRole: ACCESS_ENUM.ADMIN,
+  });
+}, 3000);*/
 
 // 路由跳转时，更新选中的菜单项
 router.afterEach((to, from, failure) => {

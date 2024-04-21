@@ -3,6 +3,7 @@ import HomeView from "@/views/ExampleView.vue";
 import AddQuestionView from "@/views/question/AddQuestionView.vue";
 import ManageQuestionView from "@/views/question/ManageQuestionView.vue";
 import UpdateQuestionView from "@/views/question/UpdateQuestionView.vue";
+import QuestionsView from "@/views/question/QuestionsView.vue";
 import AdminView from "@/views/AdminView.vue";
 import UserLayout from "@/layouts/UserLayout.vue"
 import UserLoginView from "@/views/user/UserLoginView.vue"
@@ -33,6 +34,11 @@ export const routes: Array<RouteRecordRaw> = [
     ]
   },
   {
+    path: "/",
+    name: "浏览题目",
+    component: QuestionsView,
+  },
+  {
     path: "/add/question",
     name: "创建题目",
     component: AddQuestionView,
@@ -46,6 +52,7 @@ export const routes: Array<RouteRecordRaw> = [
     component: AddQuestionView,
     meta: {
       access: ACCESS_ENUM.ADMIN,
+      hideInMenu: true,
     },
   },
   {
@@ -56,36 +63,34 @@ export const routes: Array<RouteRecordRaw> = [
       access: ACCESS_ENUM.ADMIN,
     },
   },
-  {
-    path: "/",
-    name: "浏览题目",
-    component: HomeView,
-  },
-  {
-    path: "/hide",
-    name: "隐藏页面",
-    component: HomeView,
-    meta: {
-      hideInMenu: true,
-    }
-  },
+  // {
+  //   path: "/hide",
+  //   name: "隐藏页面",
+  //   component: HomeView,
+  //   meta: {
+  //     hideInMenu: true,
+  //   }
+  // },
   {
     path: "/noauth",
     name: "无权限",
     component: NoAuthPage,
-  },
-  {
-    path: "/admin",
-    name: "管理员可见",
-    component: AdminView,
     meta: {
-      access: ACCESS_ENUM.ADMIN,
-    },
+      hideInMenu: true,
+    }
   },
-  {
-    path: "/about",
-    name: "关于我的",
-    component: () =>
-      import("../views/AboutView.vue"),
-  },
+  // {
+  //   path: "/admin",
+  //   name: "管理员可见",
+  //   component: AdminView,
+  //   meta: {
+  //     access: ACCESS_ENUM.ADMIN,
+  //   },
+  // },
+  // {
+  //   path: "/about",
+  //   name: "关于我的",
+  //   component: () =>
+  //     import("../views/AboutView.vue"),
+  // },
 ];
