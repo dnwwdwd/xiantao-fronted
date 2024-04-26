@@ -1,5 +1,5 @@
 <template>
-  <div id="manageQuestionView">
+  <div id="questionView">
     <a-form :model="searchParams" layout="inline">
       <a-form-item field="title" label="名称" style="min-width: 240px">
         <a-input v-model="searchParams.title" placeholder="请输入题目名称" />
@@ -29,7 +29,7 @@
           <a-tag
             v-for="(tag, index) of record.tags"
             :key="index"
-            :color="colors[index]"
+            :color="colors[index % 4]"
           >
             {{ tag }}
           </a-tag>
@@ -106,7 +106,7 @@ const doSearch = () => {
  */
 const toQuestionPage = (question: Question) => {
   router.push({
-    path: `/view/question/${question.id}`,
+    path: `/do/question/${question.id}`,
   });
 };
 
@@ -163,7 +163,7 @@ const columns = [
 </script>
 
 <style scoped>
-#manageQuestionView {
+#questionView {
   margin: 0 auto;
   max-width: 1300px;
 }
