@@ -76,16 +76,14 @@
 
 <script setup lang="ts">
 import { defineProps, onMounted, ref, withDefaults } from "vue";
+import message from "@arco-design/web-vue/es/message";
+import CodeEditor from "@/components/CodeEditor.vue";
+import MdViewer from "@/components/MdViewer.vue";
 import {
   QuestionControllerService,
   QuestionSubmitAddRequest,
-  QuestionSubmitControllerService,
   QuestionVO,
 } from "../../../generated";
-import message from "@arco-design/web-vue/es/message";
-import { useRouter } from "vue-router";
-import CodeEditor from "@/components/CodeEditor.vue";
-import MdViewer from "@/components/MdViewer.vue";
 
 const colors = ref(["magenta", "cyan", "arcoblue", "pinkpurple"]);
 
@@ -134,7 +132,7 @@ const doSubmit = async () => {
   if (!question.value?.id) {
     return;
   }
-  const res = await QuestionSubmitControllerService.doQuestionSubmitUsingPost({
+  const res = await QuestionControllerService.doQuestionSubmitUsingPost({
     ...form.value,
     questionId: question.value?.id,
   });
