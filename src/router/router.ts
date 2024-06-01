@@ -1,17 +1,9 @@
 import { RouteRecordRaw } from "vue-router";
-import HomeView from "@/views/ExampleView.vue";
-import AddQuestionView from "@/views/question/AddQuestionView.vue";
-import ManageQuestionView from "@/views/question/ManageQuestionView.vue";
-import UpdateQuestionView from "@/views/question/UpdateQuestionView.vue";
-import QuestionsView from "@/views/question/QuestionsView.vue";
-import QuestionSubmitView from "@/views/question/QuestionSubmitView.vue";
-import DoQuestionView from "@/views/question/DoQuestionView.vue";
-import AdminView from "@/views/AdminView.vue";
-import UserLayout from "@/layouts/UserLayout.vue"
-import UserLoginView from "@/views/user/UserLoginView.vue"
-import UserRegisterView from "@/views/user/UserRegisterView.vue"
-import NoAuthPage from "@/views/NoAuthPage.vue"
-
+import UserLayout from "@/layouts/UserLayout.vue";
+import UserLoginView from "@/views/user/UserLoginView.vue";
+import UserRegisterView from "@/views/user/UserRegisterView.vue";
+import NoAuthPage from "@/views/NoAuthPage.vue";
+import HomePage from "@/views/HomePage.vue";
 import ACCESS_ENUM from "@/access/accessEnum";
 
 export const routes: Array<RouteRecordRaw> = [
@@ -33,81 +25,22 @@ export const routes: Array<RouteRecordRaw> = [
         name: "用户注册",
         component: UserRegisterView,
       },
-    ]
+    ],
   },
-  {
-    path: "/",
-    name: "浏览题目",
-    component: QuestionsView,
-  },
-  {
-    path: "/question_submit",
-    name: "浏览题目提交",
-    component: QuestionSubmitView,
-  },
-  {
-    path: "/do/question/:id",
-    name: "在线做题",
-    component: DoQuestionView,
-    props: true,
-    meta: {
-      access: ACCESS_ENUM.USER,
-      hide: true,
-    }
-  },
-  {
-    path: "/add/question",
-    name: "创建题目",
-    component: AddQuestionView,
-    meta: {
-      access: ACCESS_ENUM.ADMIN,
-    },
-  },
-  {
-    path: "/update/question",
-    name: "修改题目",
-    component: AddQuestionView,
-    meta: {
-      access: ACCESS_ENUM.ADMIN,
-      hideInMenu: true,
-    },
-  },
-  {
-    path: "/manage/question",
-    name: "管理题目",
-    component: ManageQuestionView,
-    meta: {
-      access: ACCESS_ENUM.ADMIN,
-    },
-  },
-  // {
-  //   path: "/hide",
-  //   name: "隐藏页面",
-  //   component: HomeView,
-  //   meta: {
-  //     hideInMenu: true,
-  //   }
-  // },
   {
     path: "/noauth",
     name: "无权限",
     component: NoAuthPage,
     meta: {
       hideInMenu: true,
+    },
+  },
+  {
+    path: "/",
+    name: "推荐",
+    component: HomePage,
+    meta: {
+      access: ACCESS_ENUM.USER,
     }
   },
-  // {
-  //   path: "/admin",
-  //   name: "管理员可见",
-  //   component: AdminView,
-  //   meta: {
-  //     access: ACCESS_ENUM.ADMIN,
-  //   },
-  // },
-  // {
-  //   path: "/about",
-  //   name: "关于我的",
-  //   component: () =>
-  //     import("../views/AboutView.vue"),
-  // },
 ];

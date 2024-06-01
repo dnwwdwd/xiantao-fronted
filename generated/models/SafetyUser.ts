@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type UserVO = {
+export type SafetyUser = {
     avatarUrl?: string;
     email?: string;
     gender?: number;
@@ -10,6 +10,7 @@ export type UserVO = {
     likedTags?: string;
     phone?: string;
     profile?: string;
+    userAccount?: string;
     username?: string;
 };
 

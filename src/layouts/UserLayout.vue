@@ -3,8 +3,8 @@
     <a-layout style="min-height: 100vh;">
       <a-layout-header class="header">
         <a-space>
-          <img src="../assets/fairy.svg" class="logo"/>
-          <div >判题精灵</div>
+          <img src="../assets/img.png" class="logo"/>
+          <div >闲淘</div>
         </a-space>
       </a-layout-header>
       <a-layout-content class="content">
@@ -12,7 +12,7 @@
       </a-layout-content>
       <a-layout-footer class="footer">
         <a href="https://github.com/dnwwdwd" target="_blank">
-          判题精灵 by C1own
+          闲淘 by C1own
         </a>
       </a-layout-footer>
     </a-layout>

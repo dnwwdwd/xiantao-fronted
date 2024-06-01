@@ -9,7 +9,7 @@
       </a-layout-content>
       <a-layout-footer class="footer">
         <a href="https://github.com/dnwwdwd" target="_blank">
-          判题精灵 by C1own
+          闲淘 by C1own
         </a>
       </a-layout-footer>
     </a-layout>

@@ -2,10 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type PostEditRequest = {
-    content?: string;
-    id?: number;
-    tags?: Array<string>;
-    title?: string;
+export type PostThumbRequest = {
+    isThumb?: boolean;
+    postId?: number;
 };
 

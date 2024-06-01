@@ -14,8 +14,8 @@
           disabled
         >
           <div class="title-bar">
-            <img class="logo" src="../assets/fairy.svg" />
-            <div class="title">精灵 OJ</div>
+            <img class="logo" src="https://img.te5.com/uploads/allimg/220823/232-220R3104402.jpg" />
+            <div class="title">闲淘</div>
           </div>
         </a-menu-item>
           <a-menu-item v-for="item in visibleRoutes" :key="item.path">
@@ -91,8 +91,9 @@ onMounted(() => {
   align-items: center;
 }
 .logo {
-  width: 40px;
+  width: 70px;
   height: 48px;
+  border-radius: 20px;
 }
 .title {
   margin-left: 16px;

@@ -2,10 +2,11 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { PostVO } from './PostVO';
-export type BaseResponse_PostVO_ = {
+import type { SafetyUser } from './SafetyUser';
+export type BaseResponse_SafetyUser_ = {
     code?: number;
-    data?: PostVO;
+    data?: SafetyUser;
+    description?: string;
     message?: string;
 };
 
