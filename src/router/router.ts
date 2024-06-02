@@ -4,7 +4,7 @@ import UserLoginView from "@/views/user/UserLoginView.vue";
 import UserRegisterView from "@/views/user/UserRegisterView.vue";
 import NoAuthPage from "@/views/NoAuthPage.vue";
 import HomePage from "@/views/HomePage.vue";
-import ACCESS_ENUM from "@/access/accessEnum";
+import MyPage from "@/views/MyPage.vue";
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -39,8 +39,10 @@ export const routes: Array<RouteRecordRaw> = [
     path: "/",
     name: "推荐",
     component: HomePage,
-    meta: {
-      access: ACCESS_ENUM.USER,
-    }
+  },
+  {
+    path: "/my",
+    name: "我的",
+    component: MyPage,
   },
 ];

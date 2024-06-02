@@ -12,12 +12,15 @@ export type { BaseResponse_List_PostVO_ } from './models/BaseResponse_List_PostV
 export type { BaseResponse_List_UserVO_ } from './models/BaseResponse_List_UserVO_';
 export type { BaseResponse_long_ } from './models/BaseResponse_long_';
 export type { BaseResponse_SafetyUser_ } from './models/BaseResponse_SafetyUser_';
+export type { BaseResponse_User_ } from './models/BaseResponse_User_';
 export type { DeleteRequest } from './models/DeleteRequest';
 export type { PostAddRequest } from './models/PostAddRequest';
 export type { PostFavourRequest } from './models/PostFavourRequest';
+export type { PostQueryRequest } from './models/PostQueryRequest';
 export type { PostThumbRequest } from './models/PostThumbRequest';
 export type { PostVO } from './models/PostVO';
 export type { SafetyUser } from './models/SafetyUser';
+export type { User } from './models/User';
 export type { UserLoginRequest } from './models/UserLoginRequest';
 export type { UserQueryRequest } from './models/UserQueryRequest';
 export type { UserRegisterRequest } from './models/UserRegisterRequest';

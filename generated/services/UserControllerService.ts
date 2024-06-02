@@ -6,6 +6,7 @@ import type { BaseResponse_boolean_ } from '../models/BaseResponse_boolean_';
 import type { BaseResponse_List_UserVO_ } from '../models/BaseResponse_List_UserVO_';
 import type { BaseResponse_long_ } from '../models/BaseResponse_long_';
 import type { BaseResponse_SafetyUser_ } from '../models/BaseResponse_SafetyUser_';
+import type { BaseResponse_User_ } from '../models/BaseResponse_User_';
 import type { UserLoginRequest } from '../models/UserLoginRequest';
 import type { UserQueryRequest } from '../models/UserQueryRequest';
 import type { UserRegisterRequest } from '../models/UserRegisterRequest';
@@ -32,13 +33,13 @@ export class UserControllerService {
     /**
      * userLogin
      * @param userLoginRequest userLoginRequest
-     * @returns BaseResponse_SafetyUser_ OK
+     * @returns BaseResponse_User_ OK
      * @returns any Created
      * @throws ApiError
      */
     public static userLoginUsingPost(
         userLoginRequest: UserLoginRequest,
-    ): CancelablePromise<BaseResponse_SafetyUser_ | any> {
+    ): CancelablePromise<BaseResponse_User_ | any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/user/login',

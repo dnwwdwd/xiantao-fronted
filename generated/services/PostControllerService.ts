@@ -7,6 +7,7 @@ import type { BaseResponse_List_PostVO_ } from '../models/BaseResponse_List_Post
 import type { BaseResponse_long_ } from '../models/BaseResponse_long_';
 import type { DeleteRequest } from '../models/DeleteRequest';
 import type { PostAddRequest } from '../models/PostAddRequest';
+import type { PostQueryRequest } from '../models/PostQueryRequest';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
@@ -75,6 +76,31 @@ export class PostControllerService {
         });
     }
     /**
+     * listMyPost
+     * @param pageNum pageNum
+     * @param pageSize pageSize
+     * @returns BaseResponse_List_PostVO_ OK
+     * @throws ApiError
+     */
+    public static listMyPostUsingGet(
+        pageNum?: number,
+        pageSize?: number,
+    ): CancelablePromise<BaseResponse_List_PostVO_> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/post/list/my',
+            query: {
+                'pageNum': pageNum,
+                'pageSize': pageSize,
+            },
+            errors: {
+                401: `Unauthorized`,
+                403: `Forbidden`,
+                404: `Not Found`,
+            },
+        });
+    }
+    /**
      * recommendPosts
      * @param pageNum pageNum
      * @param pageSize pageSize
@@ -92,6 +118,27 @@ export class PostControllerService {
                 'pageNum': pageNum,
                 'pageSize': pageSize,
             },
+            errors: {
+                401: `Unauthorized`,
+                403: `Forbidden`,
+                404: `Not Found`,
+            },
+        });
+    }
+    /**
+     * searchPost
+     * @param postQueryRequest postQueryRequest
+     * @returns BaseResponse_List_PostVO_ OK
+     * @returns any Created
+     * @throws ApiError
+     */
+    public static searchPostUsingPost(
+        postQueryRequest: PostQueryRequest,
+    ): CancelablePromise<BaseResponse_List_PostVO_ | any> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/post/search',
+            body: postQueryRequest,
             errors: {
                 401: `Unauthorized`,
                 403: `Forbidden`,

@@ -2,19 +2,14 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type UserQueryRequest = {
+export type PostQueryRequest = {
     asc?: string;
-    email?: string;
-    gender?: number;
-    likedTags?: Array<string>;
+    maxPrice?: number;
+    minPrice?: number;
     orderName?: string;
     pageNum?: number;
     pageSize?: number;
-    phone?: string;
-    profile?: string;
     searchParam?: string;
-    userAccount?: string;
-    userStatus?: number;
-    username?: string;
+    tagList?: Array<string>;
 };
 

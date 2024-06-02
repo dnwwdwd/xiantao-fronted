@@ -1,48 +1,61 @@
 <template>
-  <div id="basicLayout">
-    <a-layout style="min-height: 100vh;">
-      <a-layout-header class="header">
-        <global-header />
-      </a-layout-header>
-      <a-layout-content class="content">
-        <router-view />
-      </a-layout-content>
-      <a-layout-footer class="footer">
-        <a href="https://github.com/dnwwdwd" target="_blank">
-          闲淘 by C1own
-        </a>
-      </a-layout-footer>
-    </a-layout>
-  </div>
+  <a-layout class="layout-demo">
+    <a-layout-sider hide-trigger collapsible>
+      <div class="logo" />
+      <a-menu
+        :defaultOpenKeys="['1']"
+        :defaultSelectedKeys="['0_3']"
+        :style="{ width: '100%' }"
+        @menuItemClick="onClickMenuItem"
+      >
+        <img
+          id="logo"
+          src="https://img.te5.com/uploads/allimg/220823/232-220R3104402.jpg"
+          height="46px"
+          width="80px"
+          style="margin-left: 30px; margin-bottom: 20px"
+        />
+        <a-menu-item key="0_1">
+          <IconHome />
+          首页
+        </a-menu-item>
+        <a-menu-item key="0_2">
+          <IconCalendar />
+          通知
+        </a-menu-item>
+        <a-menu-item key="0_3">
+          <IconCalendar />
+          我的
+        </a-menu-item>
+      </a-menu>
+    </a-layout-sider>
 
+    <a-layout>
+      <a-layout style="padding: 0 24px">
+        <a-layout-content>
+          <router-view />
+        </a-layout-content>
+
+      </a-layout>
+    </a-layout>
+  </a-layout>
 </template>
 
 <script setup lang="ts">
 
-import GlobalHeader from "@/components/GlobalHeader.vue";
+import GlobalHeader from "@/components/HomePageHeader.vue";
 </script>
 
 <style scoped>
-#basicLayout{
+.layout-demo {
+  height: 100vh; /* 使布局占据整个视口高度 */
+  background: var(--color-fill-2);
+  border: 1px solid var(--color-border);
 }
 
-#basicLayout .header{
-  margin-bottom: 16px;
-  box-shadow: #eee 1px 1px 5px;
-}
 
-#basicLayout .content {
-  background: linear-gradient(to right, #ffffff, #fff);
-  margin-bottom: 16px;
-  padding: 20px;
-}
-
-#basicLayout .footer{
-  padding: 16px;
-  position: sticky;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  text-align: center;
+#logo{
+  margin-top: 30px;
+  border-radius: 20px;
 }
 </style>

@@ -2,18 +2,20 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type UserQueryRequest = {
-    asc?: string;
+export type User = {
+    avatarUrl?: string;
+    createTime?: string;
     email?: string;
     gender?: number;
-    likedTags?: Array<string>;
-    orderName?: string;
-    pageNum?: number;
-    pageSize?: number;
+    id?: number;
+    isDelete?: number;
+    likedTags?: string;
     phone?: string;
     profile?: string;
-    searchParam?: string;
+    updateTime?: string;
     userAccount?: string;
+    userPassword?: string;
+    userRole?: string;
     userStatus?: number;
     username?: string;
 };

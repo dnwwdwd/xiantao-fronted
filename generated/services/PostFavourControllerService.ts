@@ -3,6 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { BaseResponse_boolean_ } from '../models/BaseResponse_boolean_';
+import type { BaseResponse_List_PostVO_ } from '../models/BaseResponse_List_PostVO_';
 import type { PostFavourRequest } from '../models/PostFavourRequest';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -43,6 +44,31 @@ export class PostFavourControllerService {
             method: 'POST',
             url: '/api/post_favour/delete',
             body: postFavourRequest,
+            errors: {
+                401: `Unauthorized`,
+                403: `Forbidden`,
+                404: `Not Found`,
+            },
+        });
+    }
+    /**
+     * listMyPostFavour
+     * @param pageNum pageNum
+     * @param pageSize pageSize
+     * @returns BaseResponse_List_PostVO_ OK
+     * @throws ApiError
+     */
+    public static listMyPostFavourUsingGet(
+        pageNum?: number,
+        pageSize?: number,
+    ): CancelablePromise<BaseResponse_List_PostVO_> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/post_favour/list/my',
+            query: {
+                'pageNum': pageNum,
+                'pageSize': pageSize,
+            },
             errors: {
                 401: `Unauthorized`,
                 403: `Forbidden`,
