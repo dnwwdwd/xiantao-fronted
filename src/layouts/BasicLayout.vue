@@ -4,9 +4,8 @@
       <div class="logo" />
       <a-menu
         :defaultOpenKeys="['1']"
-        :defaultSelectedKeys="['0_3']"
+        :defaultSelectedKeys="['0_1']"
         :style="{ width: '100%' }"
-        @menuItemClick="onClickMenuItem"
       >
         <img
           id="logo"
@@ -15,18 +14,24 @@
           width="80px"
           style="margin-left: 30px; margin-bottom: 20px"
         />
-        <a-menu-item key="0_1">
-          <IconHome />
-          首页
-        </a-menu-item>
-        <a-menu-item key="0_2">
-          <IconCalendar />
-          通知
-        </a-menu-item>
-        <a-menu-item key="0_3">
-          <IconCalendar />
-          我的
-        </a-menu-item>
+        <router-link to="/">
+          <a-menu-item key="0_1">
+            <IconHome />
+            首页
+          </a-menu-item>
+        </router-link>
+        <router-link to="/notice">
+          <a-menu-item key="0_2">
+            <IconCalendar />
+            通知
+          </a-menu-item>
+        </router-link>
+        <router-link to="/my">
+          <a-menu-item key="0_3">
+            <IconCalendar />
+            我的
+          </a-menu-item>
+        </router-link>
       </a-menu>
     </a-layout-sider>
 
