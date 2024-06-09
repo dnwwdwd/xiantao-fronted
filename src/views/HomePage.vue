@@ -107,7 +107,7 @@ const form = reactive({
   content: "",
   tags: [],
   price: 0,
-  imageList: imageList.value,
+  imageList: [],
 });
 
 // const searchParams =ref({
