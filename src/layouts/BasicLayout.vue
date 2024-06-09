@@ -46,10 +46,7 @@
   </a-layout>
 </template>
 
-<script setup lang="ts">
-
-import GlobalHeader from "@/components/HomePageHeader.vue";
-</script>
+<script setup lang="ts"></script>
 
 <style scoped>
 .layout-demo {
