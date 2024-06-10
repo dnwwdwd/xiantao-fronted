@@ -7,9 +7,9 @@ export type PostVO = {
     content?: string;
     favourNum?: number;
     id?: number;
-    images?: string;
+    images?: [];
     price?: number;
-    tags?: string;
+    tags?: [];
     thumbNum?: number;
     title?: string;
     userVO?: UserVO;

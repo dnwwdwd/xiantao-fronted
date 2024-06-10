@@ -43,7 +43,6 @@
       style="max-width: 480px; margin: 0 auto"
       :model="form"
       auto-label-width
-      @submit="handleSubmit"
       label-align="right"
     >
       <a-form-item field="title" tooltip="标题不少于1个字" label="帖子标题">
@@ -76,22 +75,27 @@
       <a-form-item label="宝贝图片" tooltip="上传宝贝的图片">
         <a-upload
           list-type="picture-card"
-          action="/"
           :default-file-list="imageList"
+          @change="onChange"
           image-preview
           :auto-upload="false"
         />
       </a-form-item>
     </a-form>
   </a-drawer>
+
 </template>
 
 <script setup lang="ts">
 import PostCardList from "@/components/PostCardList.vue";
 import UserCardList from "@/components/UserCardList.vue";
 import { reactive, ref, watchEffect } from "vue";
-import { Message } from "@arco-design/web-vue";
-import { PostControllerService, UserControllerService } from "../../generated";
+import { FileItem, Message } from "@arco-design/web-vue";
+import {
+  PostControllerService,
+  UploadControllerService,
+  UserControllerService
+} from "../../generated";
 
 const searchParam = ref("");
 
@@ -105,9 +109,9 @@ const imageList = ref([]);
 const form = reactive({
   title: "",
   content: "",
-  tags: [],
+  tags: [] as string[],
   price: 0,
-  imageList: [],
+  images: [] as string[]
 });
 
 // const searchParams =ref({
@@ -132,7 +136,7 @@ const searchUser = async () => {
   const res: any = await UserControllerService.searchUsersUsingPost({
     username: searchParam.value,
     pageNum: 1,
-    pageSize: 8,
+    pageSize: 8
   });
   if (res.code === 0) {
     userList.value = res.data;
@@ -145,7 +149,7 @@ const searchPost = async () => {
   const res: any = await PostControllerService.searchPostUsingPost({
     searchParam: searchParam.value,
     pageNum: 1,
-    pageSize: 8,
+    pageSize: 8
   });
   if (res?.code === 0) {
     postList.value = res.data;
@@ -183,15 +187,29 @@ const publishPost = () => {
   visible.value = true;
 };
 
-const handleClick = () => {
-  visible.value = true;
-};
-const handleOk = () => {
-  console.log(form);
+const handleOk = async () => {
+  const res = await PostControllerService.addPostUsingPost(form);
   visible.value = false;
 };
+
 const handleCancel = () => {
   visible.value = false;
+};
+
+const file = ref();
+
+// 定义一个方法来处理文件上传的逻辑
+const onChange = async (_: any, currentFile: FileItem) => {
+  file.value = currentFile;
+  const res = await UploadControllerService.uploadImageUsingPost(
+    currentFile?.file
+  );
+  if (res.code === 0) {
+    form.images.push(res.data);
+    Message.success("图片上传成功");
+  } else {
+    Message.error("图片上传失败");
+  }
 };
 </script>
 
